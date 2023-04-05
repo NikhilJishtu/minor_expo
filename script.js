@@ -87,7 +87,7 @@ let pathData = [
 ];
 
 let soldiers = [];
-const NUM_SOLDIERS = 100;
+const NUM_SOLDIERS = 10;
 
 let soldierStart = new Vector(100,0);
 

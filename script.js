@@ -5,25 +5,84 @@ const SH = canvas.height
 const TILE_W = 25;
 let bgcolor = "green";
 
-function update () {
 
+class Vector {
+    constructor(x,y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+let startPos = new Vector(100,0);
+
+let pathData = [
+    new Vector(0,200),
+    new Vector(200,0)
+];
+
+function update() {
+
+}
+
+function renderPath() {
+    let drawPos = new Vector(startPos.x,startPos.y);
+
+    context.fillStyle = "gray";
+
+    pathData.forEach(function(path){
+        if (path.x == 0) {
+           let x = drawPos.x - TILE_W;
+           let y = drawPos.y - TILE_W;
+           let w = TILE_W * 2;
+           let h = path.y + TILE_W * 2;
+
+           context.fillRect(x,y,w,h);
+        }
+
+        else {
+            let x = drawPos.x - TILE_W;
+            let y = drawPos.y - TILE_W;
+            let w = path.x + TILE_W * 2;
+            let h = TILE_W *2;
+
+            context.fillRect(x,y,w,h);
+        }
+
+        drawPos.x += path.x;
+        drawPos.y += path.y;
+    });
 }
 
 function renderGrid() {
     context.fillStyle = "black";
 
-    let x;
+    let x = 0;
     for (let i = 0; i < SW / TILE_W; i++) {
         context.beginPath();
-        context.moveTo(x,0);
+        context.moveTo(x, 0);
+        context.lineTo(x, SH);
+        context.stroke();
 
         x += TILE_W;
+    }
+
+    let y = 0;
+    for (let i = 0; i < SH / TILE_W; i++) {
+        context.beginPath();
+        context.moveTo(0, y);
+        context.lineTo(SW, y);
+        context.stroke();
+
+        y += TILE_W;
     }
 }
 
 function render() {
     context.fillStyle = bgcolor;
-    context.fillRect(0,0,SW,SH);
+    context.fillRect(0, 0, SW, SH);
+
+    renderPath();
+    renderGrid();
 }
 
 function play() {
@@ -31,4 +90,4 @@ function play() {
     render();
 }
 
-setInterval(play,1000/60);
+setInterval(play, 1000 / 60);

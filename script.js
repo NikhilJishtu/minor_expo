@@ -6,6 +6,40 @@ const TILE_W = 25;
 let bgcolor = "green";
 
 
+class Soldier {
+    constructor(pos,color,r,health,attack) {
+        this.pos = pos;
+        this.color = color;
+        this.r = r;
+        this.health = health;
+        this.attack = attack;
+
+        this.targets = [];
+        this.targets[0] = new Vector(startPos.x + pathData[0].x,startPos.y + pathData[0].y);
+
+        for (let i = 1; i < pathData.length; i++) {
+            let prevTarget = this.targets[i -1];
+            let path = pathData[i];
+
+            let newTarget = new Vector(prevTarget.x + path.x, prevTarget.y + path.y);
+            this.targets[i] = newTarget;
+        }
+
+        this.currentTarget = this.targets[0];
+        this.dir = new Vector(0,0);
+        this.speed = 4;
+        this.minTargetDist = 2;
+    }
+
+    render(){
+        context.fillStyle = this.color;
+        context.beginPath();
+        context.arc(this.pos.x,this.pos.y,this.r,0,Math.PI* 2);
+        context.fill();
+    }
+}
+
+
 class Vector {
     constructor(x,y) {
         this.x = x;
@@ -19,9 +53,10 @@ let pathData = [
     new Vector(0,200),
     new Vector(550,0),
     new Vector(0,250),
-    new Vector(-500,0),
-    new Vector(0,200)
+    new Vector(-500,0)
 ];
+
+let soldier = new Soldier(startPos,"red",20,100,10);
 
 function update() {
 

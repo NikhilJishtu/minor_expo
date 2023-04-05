@@ -17,7 +17,10 @@ let startPos = new Vector(100,0);
 
 let pathData = [
     new Vector(0,200),
-    new Vector(200,0)
+    new Vector(550,0),
+    new Vector(0,250),
+    new Vector(-500,0),
+    new Vector(0,200)
 ];
 
 function update() {

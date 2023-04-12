@@ -80,10 +80,15 @@ class Vector {
 let startPos = new Vector(100, 0);
 
 let pathData = [
+    new Vector(0, 100),
+    new Vector(900, 0),
     new Vector(0, 200),
-    new Vector(550, 0),
+    new Vector(600, 0),
+    new Vector(0, 150),
+    new Vector(-1250, 0),
     new Vector(0, 250),
-    new Vector(-500, 0)
+    new Vector(1000, 0),
+    new Vector(0, 450),
 ];
 
 let soldiers = [];

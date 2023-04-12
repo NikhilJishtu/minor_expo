@@ -83,12 +83,6 @@ class Soldier {
         }
     }
 
-    
-    
-    
-    
-    
-    
 
     render() {
         context.fillStyle = this.color;
@@ -114,11 +108,11 @@ let pathData = [
     new Vector(0, 100),
     new Vector(900, 0),
     new Vector(0, 200),
-    new Vector(600, 0),
+    new Vector(350, 0),
     new Vector(0, 150),
     new Vector(-1250, 0),
     new Vector(0, 250),
-    new Vector(1000, 0),
+    new Vector(500, 0),
     new Vector(0, 450),
 ];
 

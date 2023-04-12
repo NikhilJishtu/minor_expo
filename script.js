@@ -112,8 +112,10 @@ let pathData = [
     new Vector(0, 150),
     new Vector(-1250, 0),
     new Vector(0, 250),
-    new Vector(500, 0),
-    new Vector(0, 450),
+    new Vector(1200, 0),
+    new Vector(0, 150),
+    new Vector(-950, 0),
+    new Vector(0, 250)
 ];
 
 let soldiers = [];

@@ -53,50 +53,42 @@ class Soldier {
 
     update() {
         if (this.currentTarget == null) return;
-
+    
         let dir = new Vector(this.currentTarget.x - this.pos.x, this.currentTarget.y - this.pos.y);
         let distance = (dir.x ** 2 + dir.y ** 2) ** (1 / 2);
-
+    
         if (distance == 0) return;
-
+    
         dir.x /= distance;
         dir.y /= distance;
-
+    
         this.pos.x += dir.x * this.speed;
         this.pos.y += dir.y * this.speed;
-
+    
         let xDist = Math.abs(this.pos.x - this.currentTarget.x);
         let yDist = Math.abs(this.pos.y - this.currentTarget.y);
-
+    
         if (xDist <= this.minTargetDist && yDist <= this.minTargetDist) {
             this.targets.splice(0, 1);
-
+    
             if (this.targets.length == 0) {
-                this.health -= 10; // adjust the amount of health lost as needed
-                if (this.health <= 0) {
-                    let index = soldiers.indexOf(this);
-                    if (index != -1) {
-                        soldiers.splice(index, 1);
-                    }
-                }
-                else {
-                    this.targets = [];
-                    this.targets[0] = new Vector(startPos.x + pathData[0].x, startPos.y + pathData[0].y);
-                    for (let i = 1; i < pathData.length; i++) {
-                        let prevTarget = this.targets[i - 1];
-                        let path = pathData[i];
-                        let newTarget = new Vector(prevTarget.x + path.x, prevTarget.y + path.y);
-                        this.targets[i] = newTarget;
-                    }
-                    this.currentTarget = this.targets[0];
+                let index = soldiers.indexOf(this);
+                if (index != -1) {
+                    soldiers.splice(index, 1);
                 }
             }
             else {
-
                 this.currentTarget = this.targets[0];
             }
         }
     }
+
+    
+    
+    
+    
+    
+    
 
     render() {
         context.fillStyle = this.color;

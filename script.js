@@ -32,6 +32,25 @@ class Soldier {
         this.minTargetDist = 2;
     }
 
+    renderHealthBar() {
+        let x = this.pos.x - this.r;
+        let y = this.pos.y + this.r + 5;
+        let w = this.r * 2;
+        let h = 5;
+        let healthPct = this.health / this.maxHealth;
+        let healthColor = "green";
+        if (healthPct < 0.5) {
+            healthColor = "yellow";
+        }
+        if (healthPct < 0.2) {
+            healthColor = "red";
+        }
+        context.fillStyle = "gray";
+        context.fillRect(x, y, w, h);
+        context.fillStyle = healthColor;
+        context.fillRect(x, y, w * healthPct, h);
+    }
+
     update() {
         if (this.currentTarget == null) return;
 
@@ -53,16 +72,14 @@ class Soldier {
             this.targets.splice(0, 1);
 
             if (this.targets.length == 0) {
-                this.health -= 10;
+                this.health -= 10; // adjust the amount of health lost as needed
                 if (this.health <= 0) {
                     let index = soldiers.indexOf(this);
                     if (index != -1) {
                         soldiers.splice(index, 1);
                     }
                 }
-
                 else {
-
                     this.targets = [];
                     this.targets[0] = new Vector(startPos.x + pathData[0].x, startPos.y + pathData[0].y);
                     for (let i = 1; i < pathData.length; i++) {
@@ -75,28 +92,10 @@ class Soldier {
                 }
             }
             else {
+
                 this.currentTarget = this.targets[0];
             }
         }
-    }
-
-    renderHealthBar() {
-        let x = this.pos.x - this.r;
-        let y = this.pos.y + this.r + 5;
-        let w = this.r * 2;
-        let h = 5;
-        let healthPct = this.health / this.maxHealth;
-        let healthColor = "green";
-        if (healthPct < 0.5) {
-            healthColor = "yellow";
-        }
-        if (healthPct < 0.2) {
-            healthColor = "red";
-        }
-        context.fillStyle = "gray";
-        context.fillRect(x, y, w, h);
-        context.fillStyle = healthColor;
-        context.fillRect(x, y, w * healthPct, h);
     }
 
     render() {
@@ -105,8 +104,8 @@ class Soldier {
         context.arc(this.pos.x, this.pos.y, this.r, 0, Math.PI * 2);
         context.fill();
         this.renderHealthBar();
-    }
 
+    }
 }
 
 

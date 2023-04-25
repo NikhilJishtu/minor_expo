@@ -5,6 +5,107 @@ const SH = canvas.height
 const TILE_W = 25;
 let bgcolor = "green";
 
+let towers = [];
+let projectiles = [];
+let soldiers = [];
+
+class Tower {
+    constructor(pos, range, color) {
+        this.pos = pos;
+        this.range = range;
+        this.color = color;
+        this.targets = [];
+    }
+
+    shoot() {
+        if (this.targets.length > 0) {
+            let target = this.targets[0];
+            let dx = target.pos.x - this.pos.x;
+            let dy = target.pos.y - this.pos.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            let velocity = {x: dx / distance, y: dy / distance};
+            let projectile = new Projectile(this.pos.x, this.pos.y, velocity, 10);
+            projectiles.push(projectile);
+        }
+    }
+}
+
+canvas.addEventListener("click", function(event) {
+    let rect = canvas.getBoundingClientRect();
+    let mouseX = event.clientX - rect.left;
+    let mouseY = event.clientY - rect.top;
+
+    // Check if click is within canvas boundaries
+    if (mouseX >= 0 && mouseX <= canvas.width && mouseY >= 0 && mouseY <= canvas.height) {
+        // Check if user has enough resources to build a tower
+
+        // Create new tower object at clicked position with predefined range
+        let newTower = new Tower(new Vector(mouseX, mouseY), 100, "gray");
+        towers.push(newTower);
+    }
+});
+
+function update() {
+    // Loop through soldiers and towers to check for targets
+    soldiers.forEach(function(s) {
+        towers.forEach(function(t) {
+            let dist = Math.sqrt((s.pos.x - t.pos.x) ** 2 + (s.pos.y - t.pos.y) ** 2);
+            if (dist <= t.range) {
+                if (!t.targets.includes(s)) {
+                    t.targets.push(s);
+                }
+            }
+            else {
+                let index = t.targets.indexOf(s);
+                if (index != -1) {
+                    t.targets.splice(index, 1);
+                }
+            }
+        });
+    });
+
+    // Loop through towers and shoot projectiles
+    towers.forEach(function(t) {
+        t.shoot();
+    });
+
+    // Loop through projectiles and update position
+    for (let i = 0; i < projectiles.length; i++) {
+        let projectile = projectiles[i];
+        projectile.update();
+
+        // Check for collisions with soldiers
+        for (let j = 0; j < soldiers.length; j++) {
+            let soldier = soldiers[j];
+            let dx = soldier.pos.x - projectile.pos.x;
+            let dy = soldier.pos.y - projectile.pos.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < soldier.r) {
+                soldier.health -= projectile.damage;
+            }
+        }
+    }
+}
+
+function render() {
+    // Loop through towers and draw circles
+    towers.forEach(function(t) {
+        context.beginPath();
+        context.fillStyle = t.color;
+        context.arc(t.pos.x, t.pos.y, t.range, 0, Math.PI * 2);
+        context.fill();
+
+        // Loop through targeted soldiers and draw transparent circles
+        t.targets.forEach(function(s) {
+            context.beginPath();
+            context.fillStyle = "rgba(255, 0, 0, 0.2)";
+            context.arc(s.pos.x, s.pos.y, s.r, 0, Math.PI * 2);
+            context.fill();
+        });
+    });
+}
+
 
 class Soldier {
     constructor(pos, color, r, health, attack) {
@@ -118,7 +219,6 @@ let pathData = [
     new Vector(0, 250)
 ];
 
-let soldiers = [];
 const NUM_SOLDIERS = 10;
 
 let soldierStart = new Vector(100, 0);
@@ -133,6 +233,23 @@ function update() {
     soldiers.forEach(function (s) {
         s.update();
     });
+
+        soldiers.forEach(function(s) {
+            towers.forEach(function(t) {
+                let dist = Math.sqrt((s.pos.x - t.pos.x) ** 2 + (s.pos.y - t.pos.y) ** 2);
+                if (dist <= t.range) {
+                    if (!t.targets.includes(s)) {
+                        t.targets.push(s);
+                    }
+                }
+                else {
+                    let index = t.targets.indexOf(s);
+                    if (index != -1) {
+                        t.targets.splice(index, 1);
+                    }
+                }
+            });
+        });
 }
 
 function renderPath() {
@@ -197,6 +314,22 @@ function render() {
     soldiers.forEach(function (s) {
         s.render();
     });
+
+        // Loop through towers and draw circles
+        towers.forEach(function(t) {
+            context.beginPath();
+            context.fillStyle = t.color;
+            context.arc(t.pos.x, t.pos.y, t.range, 0, Math.PI * 2);
+            context.fill();
+    
+            // Loop through targeted soldiers and draw transparent circles
+            t.targets.forEach(function(s) {
+                context.beginPath();
+                context.fillStyle = "rgba(255, 0, 0, 0.2)";
+                context.arc(s.pos.x, s.pos.y, s.r, 0, Math.PI * 2);
+                context.fill();
+            });
+        });
 }
 
 function play() {

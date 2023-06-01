@@ -31,24 +31,53 @@ class Tower {
 }
 
 canvas.addEventListener("click", function (event) {
-  let rect = canvas.getBoundingClientRect();
-  let mouseX = event.clientX - rect.left;
-  let mouseY = event.clientY - rect.top;
-
-  // Check if click is within canvas boundaries
-  if (
-    mouseX >= 0 &&
-    mouseX <= canvas.width &&
-    mouseY >= 0 &&
-    mouseY <= canvas.height
-  ) {
-    // Check if user has enough resources to build a tower
-
-    // Create new tower object at clicked position with predefined range
-    let newTower = new Tower(new Vector(mouseX, mouseY), 100, "gray");
-    towers.push(newTower);
-  }
-});
+    let rect = canvas.getBoundingClientRect();
+    let mouseX = event.clientX - rect.left;
+    let mouseY = event.clientY - rect.top;
+  
+    // Check if click is within canvas boundaries
+    if (
+      mouseX >= 0 &&
+      mouseX <= canvas.width &&
+      mouseY >= 0 &&
+      mouseY <= canvas.height
+    ) {
+      // Check if user has enough resources to build a tower
+  
+      // Check if the clicked position is on the path
+      let onPath = false;
+      let drawPos = new Vector(startPos.x, startPos.y);
+      pathData.forEach(function (path) {
+        if (path.x == 0) {
+          if (
+            mouseX >= drawPos.x - TILE_W &&
+            mouseX <= drawPos.x + TILE_W &&
+            mouseY >= drawPos.y - TILE_W &&
+            mouseY <= drawPos.y + path.y + TILE_W
+          ) {
+            onPath = true;
+          }
+        } else {
+          if (
+            mouseX >= drawPos.x - TILE_W &&
+            mouseX <= drawPos.x + path.x + TILE_W &&
+            mouseY >= drawPos.y - TILE_W &&
+            mouseY <= drawPos.y + TILE_W
+          ) {
+            onPath = true;
+          }
+        }
+        drawPos.x += path.x;
+        drawPos.y += path.y;
+      });
+  
+      if (!onPath) {
+        // Create new tower object at clicked position with predefined range
+        let newTower = new Tower(new Vector(mouseX, mouseY), 100, "gray");
+        towers.push(newTower);
+      }
+    }
+  });
 
 function update() {
   // Loop through soldiers and towers to check for targets
@@ -357,61 +386,67 @@ function renderGrid() {
 }
 
 function render() {
-  context.clearRect(0, 0, SW, SH);
-
-  context.fillStyle = bgcolor;
-  context.fillRect(0, 0, SW, SH);
-
-  renderPath();
-  renderGrid();
-
-  towers.forEach(function (t) {
-    context.beginPath();
-    context.fillStyle = t.color;
-    context.arc(t.pos.x, t.pos.y, t.range, 0, Math.PI * 2);
-    context.fill();
-
-    t.targets.forEach(function (s) {
+    context.clearRect(0, 0, SW, SH);
+  
+    context.fillStyle = bgcolor;
+    context.fillRect(0, 0, SW, SH);
+  
+    renderPath();
+    renderGrid();
+  
+    towers.forEach(function (t) {
       context.beginPath();
-      context.fillStyle = "rgba(255, 0, 0, 0.2)";
+      context.fillStyle = "rgba(128, 128, 128, 0.5)"; // Set range color with transparency
+      context.arc(t.pos.x, t.pos.y, t.range, 0, Math.PI * 2);
+      context.fill();
+  
+      context.beginPath();
+      context.fillStyle = t.color;
+      context.arc(t.pos.x, t.pos.y, 20, 0, Math.PI * 20); // Add small circle within the range
+      context.fill();
+  
+      t.targets.forEach(function (s) {
+        context.beginPath();
+        context.fillStyle = "rgba(255, 0, 0, 0.5)";
+        context.arc(s.pos.x, s.pos.y, s.r, 0, Math.PI * 2);
+        context.fill();
+      });
+    });
+  
+    soldiers.forEach(function (s) {
+      context.fillStyle = s.color;
+      context.beginPath();
       context.arc(s.pos.x, s.pos.y, s.r, 0, Math.PI * 2);
       context.fill();
+  
+      let healthPct = s.health / s.maxHealth;
+      let healthColor = "green";
+      if (healthPct < 0.5) {
+        healthColor = "yellow";
+      }
+      if (healthPct < 0.2) {
+        healthColor = "red";
+      }
+  
+      context.fillStyle = "gray";
+      context.fillRect(s.pos.x - s.r, s.pos.y + s.r + 5, s.r * 2, 5);
+      context.fillStyle = healthColor;
+      context.fillRect(
+        s.pos.x - s.r,
+        s.pos.y + s.r + 5,
+        s.r * 2 * healthPct,
+        5
+      );
     });
-  });
-
-  soldiers.forEach(function (s) {
-    context.fillStyle = s.color;
-    context.beginPath();
-    context.arc(s.pos.x, s.pos.y, s.r, 0, Math.PI * 2);
-    context.fill();
-
-    let healthPct = s.health / s.maxHealth;
-    let healthColor = "green";
-    if (healthPct < 0.5) {
-      healthColor = "yellow";
-    }
-    if (healthPct < 0.2) {
-      healthColor = "red";
-    }
-
-    context.fillStyle = "gray";
-    context.fillRect(s.pos.x - s.r, s.pos.y + s.r + 5, s.r * 2, 5);
-    context.fillStyle = healthColor;
-    context.fillRect(
-      s.pos.x - s.r,
-      s.pos.y + s.r + 5,
-      s.r * 2 * healthPct,
-      5
-    );
-  });
-
-  projectiles.forEach(function (p) {
-    context.fillStyle = "black";
-    context.beginPath();
-    context.arc(p.pos.x, p.pos.y, 3, 0, Math.PI * 2);
-    context.fill();
-  });
-}
+  
+    projectiles.forEach(function (p) {
+      context.fillStyle = "black";
+      context.beginPath();
+      context.arc(p.pos.x, p.pos.y, 3, 0, Math.PI * 2);
+      context.fill();
+    });
+  }
+  
 
 function gameLoop() {
   update();

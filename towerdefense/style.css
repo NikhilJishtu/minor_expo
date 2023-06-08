@@ -42,3 +42,8 @@ button {
 .showrange {
     display: none;
 }
+
+#GameOver{
+    font-size: 200px;
+    display: none;
+}

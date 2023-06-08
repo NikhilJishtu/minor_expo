@@ -81,6 +81,18 @@ var cooldown = 1000;
 
 var FPS = 60;
 var lives = 20;
+
+function GameOver() {
+  if (lives < 0) {
+    var x = document.getElementById("GameOver");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+  }
+ }
+}
+
 var money = 500;
 
 var nextWaveIn = 100;

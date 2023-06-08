@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minor Expo</title>
+    <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/superhero/bootstrap.min.css" rel="stylesheet">
+    <link REL="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="col-xs-4">
+                    <div id=gold></div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div id=lives></div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div id=wave></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="btn-group" data-toggle="buttons">
+
+                    <label class="btn btn-primary active" for=normal>
+                        <input type=radio name=tower checked id=normal>&#x1F52B; Normal 20$
+                    </label>
+
+                    <label class="btn btn-primary" for=poison>
+                        <input type=radio name=tower id=poison> &#x2620; Poison 35$
+                    </label>
+
+                    <label class="btn btn-primary" for=flamethrower>
+                        <input type=radio name=tower id=flamethrower> &#x1F525; Flamethrower 40$
+                    </label>
+
+                    <label class="btn btn-primary" for=minigun>
+                        <input type=radio name=tower id=minigun> Minigun 30$
+                    </label>
+
+                    <label class="btn btn-primary" for=sniper>
+                        <input type=radio name=tower id=sniper> &#x25CE; Sniper 75$
+                    </label>
+
+                    <label class="btn btn-primary" for=shotgun>
+                        <input type=radio name=tower id=shotgun> Shotgun 100$
+                    </label>
+
+                    <label class="btn btn-primary" for=slow>
+                        <input type=radio name=tower id=slow> &#x270B; Slow 35$
+                    </label>
+
+                    <label class="btn btn-info" for=showrange>
+                        <input type=checkbox id="showrange">Show range
+                    </label>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <canvas id="canvas" width="1440" height="900" onclick="placeTower();"></canvas>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <button onclick="nextWave();" id=nextWaveBtn>Next wave</button>
+                <button onclick="specialAttack();" id=specialAttackBtn>Special attack</button>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <code>Special attack: </code>
+
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary active" for=wall>
+                        <input type=radio name=attack id=wall checked>Bullet wall
+                    </label>
+
+                    <label class="btn btn-primary" for=spiral>
+                        <input type=radio name=attack id=spiral> Spiral
+                    </label>
+
+                    <label class="btn btn-primary" for=sniperSkill>
+                        <input type=radio name=attack id=sniperSkill>Sniper skill
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div id=dialog>
+            <div id=dialog-msg></div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

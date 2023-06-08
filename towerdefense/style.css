@@ -2,7 +2,7 @@
 button {
     background-color: #4CAF50;
     border: none;
-    width: 250px;
+    width: 200px;
     float: left;
     height: 3em;
     color: white;
@@ -12,4 +12,13 @@ button {
     transition: all 0.4s cubic-bezier(0, 0, 1, 0);
     text-transform: capitalize;
     margin: 1px;
+}
+
+.menu {
+    float: right;
+}
+
+.buttons {
+    float: right;
+    margin-top: -100px;
 }

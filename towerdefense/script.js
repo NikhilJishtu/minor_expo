@@ -563,12 +563,11 @@ function newParticle(x, y, life, color){
 var ctx = document.getElementById("canvas").getContext("2d");
 
 function engine() {
-    $("#gold").html("Gold: " + Math.floor(money * 10) / 10);
+    $("#gold").html("Gold: " + Math.floor(money * 10) / 10); 
     $("#lives").html("Lives: " + Math.floor(lives));
     $("#wave").html("Round: " + waveCount);
     
     $("#turret_version").html("v" + turretVersion);
-    $("#div_header").html('Welcome to Turret Defense!');
 
   ctx.fillStyle = "green";
   ctx.fillRect(0, 0, canvas.width, canvas.height);

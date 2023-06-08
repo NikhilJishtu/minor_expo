@@ -61,10 +61,13 @@ var pathPoints = [
     { x: 1000, y: 100 },
     { x: 1000, y: 300 },
     { x: 1375, y: 300 },
-    { x: 1375, y: 475 },
-    { x: 100, y: 100 },
-    { x: 250, y: 100 },
-    { x: 250,  y: 680 }
+    { x: 1375, y: 425 },
+    { x: 100, y: 425 },
+    { x: 100, y: 675 },
+    { x: 1350,  y: 675 },
+    { x: 1350,  y: 850 },
+    { x: 350,  y: 850 },
+    { x: 350,  y: 1250 }
 ];
 
 
@@ -91,7 +94,7 @@ var basic = {
   speed: 2,
   color: "black",
   hp: 10,
-  size: 10,
+  size: 20,
 }
 var fast = {
   speed: 4,
@@ -103,7 +106,7 @@ var boss = {
   speed: 1/2,
   color: "red",
   hp: 1000,
-  size: 20,
+  size: 25,
   special: "summon",
 }
 var dodger = {
@@ -117,28 +120,28 @@ var runner = {
   speed: 2,
   color: "orange",
   hp: 35,
-  size: 8,
+  size: 15,
   special: "summonFast",
 }
 var teleporter = {
   speed: 1,
   color: "lime",
   hp: 15,
-  size: 8,
+  size: 15,
   special: "teleport",
 }
 var summoner = {
   speed: 1,
   color: "brown",
   hp: 20,
-  size: 15,
+  size: 20,
   special: "summon",
 }
 var healer = {
   speed: 2,
   color: "white",
   hp: 20,
-  size: 8,
+  size: 15,
   special: "heal",
 }
 var heavy = {

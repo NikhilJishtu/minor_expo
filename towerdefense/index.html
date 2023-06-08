@@ -14,115 +14,87 @@
 <body>
     <div class="container">
         <div class="menu">
-        <div class="row">
-            <div class="col-xs-12">
+            <div class="row" id="GLW">
+                <div id=gold></div>
+                <div id=lives></div>
+                <div id=wave></div>
+            </div>
 
-                <div class="col-xs-4">
-                    <div id=gold></div>
-                </div>
+            <div class="btn-group" data-toggle="buttons">
 
-                <div class="col-xs-4">
-                    <div id=lives></div>
-                </div>
+                <label class="btn btn-primary active" for=normal>
+                    <input type=radio name=tower checked id=normal>&#x1F52B; Normal 20$
+                </label><br>
 
-                <div class="col-xs-4">
-                    <div id=wave></div>
-                </div>
+                <label class="btn btn-primary" for=poison>
+                    <input type=radio name=tower id=poison> &#x2620; Poison 35$
+                </label><br>
+
+                <label class="btn btn-primary" for=flamethrower>
+                    <input type=radio name=tower id=flamethrower> &#x1F525; Flamethrower 40$
+                </label><br>
+
+                <label class="btn btn-primary" for=minigun>
+                    <input type=radio name=tower id=minigun> Minigun 30$
+                </label>
+
+                <label class="btn btn-primary" for=sniper>
+                    <input type=radio name=tower id=sniper> &#x25CE; Sniper 75$
+                </label><br>
+
+                <label class="btn btn-primary" for=shotgun>
+                    <input type=radio name=tower id=shotgun> Shotgun 100$
+                </label><br>
+
+                <label class="btn btn-primary" for=slow>
+                    <input type=radio name=tower id=slow> &#x270B; Slow 35$
+                </label>
 
             </div>
+
         </div>
 
-        <div class="row">
-            <div class="col-xs-12">
-
-                <div class="btn-group" data-toggle="buttons">
-
-                    <label class="btn btn-primary active" for=normal>
-                        <input type=radio name=tower checked id=normal>&#x1F52B; Normal 20$
-                    </label><br>
-
-                    <label class="btn btn-primary" for=poison>
-                        <input type=radio name=tower id=poison> &#x2620; Poison 35$
-                    </label><br>
-
-                    <label class="btn btn-primary" for=flamethrower>
-                        <input type=radio name=tower id=flamethrower> &#x1F525; Flamethrower 40$
-                    </label><br>
-
-                    <label class="btn btn-primary" for=minigun>
-                        <input type=radio name=tower id=minigun> Minigun 30$
-                    </label>
-
-                    <label class="btn btn-primary" for=sniper>
-                        <input type=radio name=tower id=sniper> &#x25CE; Sniper 75$
-                    </label><br>
-
-                    <label class="btn btn-primary" for=shotgun>
-                        <input type=radio name=tower id=shotgun> Shotgun 100$
-                    </label><br>
-
-                    <label class="btn btn-primary" for=slow>
-                        <input type=radio name=tower id=slow> &#x270B; Slow 35$
-                    </label><br>
-
-                    <label class="btn btn-info" for=showrange>
-                        <input type=checkbox id="showrange">Show range
-                    </label>
-
-                </div>
-
-            </div>
-        </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12">
-
-                <canvas id="canvas" width="1440" height="1080" onclick="placeTower();"></canvas>
-
-            </div>
-        </div>
+        <canvas id="canvas" width="1440" height="1080" onclick="placeTower();"></canvas>
 
         <div class="buttons">
-        <div class="row">
-            <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12">
 
-                <button onclick="nextWave();" id=nextWaveBtn>Next wave</button>
-                <button onclick="specialAttack();" id=specialAttackBtn>Special attack</button>
+                    <button onclick="nextWave();" id=nextWaveBtn>PLAY</button>
+                    <button onclick="specialAttack();" id=specialAttackBtn>SPECIAL</button>
 
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-xs-12">
-
-                <code>Special attack: </code>
-
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary active" for=wall>
-                        <input type=radio name=attack id=wall checked>Bullet wall
-                    </label>
-
-                    <label class="btn btn-primary" for=spiral>
-                        <input type=radio name=attack id=spiral> Spiral
-                    </label>
-
-                    <label class="btn btn-primary" for=sniperSkill>
-                        <input type=radio name=attack id=sniperSkill>Sniper skill
-                    </label>
                 </div>
             </div>
+
+
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <code>SPECIAL ATTACK: </code>
+
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary active" for=wall>
+                            <input type=radio name=attack id=wall checked>Bullet wall
+                        </label>
+
+                        <label class="btn btn-primary" for=spiral>
+                            <input type=radio name=attack id=spiral> Spiral
+                        </label>
+
+                        <label class="btn btn-primary" for=sniperSkill>
+                            <input type=radio name=attack id=sniperSkill>Sniper skill
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div id=dialog>
+                <div id=dialog-msg></div>
+            </div>
         </div>
 
-        <div id=dialog>
-            <div id=dialog-msg></div>
-        </div>
     </div>
-    
-    </div>
-    </div>
-    </div>
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

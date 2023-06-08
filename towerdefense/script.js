@@ -565,7 +565,7 @@ var ctx = document.getElementById("canvas").getContext("2d");
 function engine() {
     $("#gold").html("Gold: " + Math.floor(money * 10) / 10);
     $("#lives").html("Lives: " + Math.floor(lives));
-    $("#wave").html("Wave: " + waveCount);
+    $("#wave").html("Round: " + waveCount);
     
     $("#turret_version").html("v" + turretVersion);
     $("#div_header").html('Welcome to Turret Defense!');

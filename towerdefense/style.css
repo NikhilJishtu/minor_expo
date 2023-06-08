@@ -1,6 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow: hidden;
+    background-color: rgb(243, 180, 87);
+}
 
 button {
-    background-color: #4CAF50;
+    background-color: #4caf50;
     border: none;
     width: 200px;
     float: left;
@@ -16,6 +27,10 @@ button {
 
 .menu {
     float: right;
+}
+
+#GLW {
+    margin-left: -210px;
 }
 
 .buttons {

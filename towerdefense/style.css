@@ -19,6 +19,17 @@ body {
     display: flex;
 }
 
+#canvas {
+    position: relative;
+}
+
+#map {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 /* button {
     flex-basis: calc(40% - 6px); 
     border-radius: 5px;

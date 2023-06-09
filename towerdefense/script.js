@@ -82,17 +82,6 @@ var cooldown = 1000;
 var FPS = 60;
 var lives = 20;
 
-function GameOver() {
-  if (lives < 0) {
-    var x = document.getElementById("GameOver");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-  }
- }
-}
-
 var money = 500;
 
 var nextWaveIn = 100;
@@ -103,7 +92,7 @@ var mouseY = 0;
 
 // enemies
 var basic = {
-  speed: 2,
+  speed: 5,
   color: "black",
   hp: 10,
   size: 20,
@@ -506,6 +495,7 @@ function newEnemy(type, x, y, pathNode) {
 
   enemies[id] = e;
 }
+
 
 function newBullet(x,y, dmg, vx, vy, fire, poison, slow) {
   

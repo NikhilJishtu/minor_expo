@@ -14,7 +14,9 @@
 <body>
     <div class="container">
 
-<div id="GameOver">GAME OVER NOOB</div>
+        <div id="GameOver">GAME OVER NOOB</div>
+
+        <canvas id="canvas" width="1440" height="1080" onclick="placeTower();"></canvas>
 
         <div class="menu">
             <div class="row" id="GLW">
@@ -26,49 +28,59 @@
             <div class="btn-group" data-toggle="buttons">
 
                 <label class="btn btn-primary active btn-normal" for=normal>
-                    <input type=radio name=tower checked id=normal> 🔫 Normal 20$
+                    <input type=radio name=tower checked id=normal> 🔫<br> Normal 20$
                 </label><br>
 
                 <label class="btn btn-primary" for=poison>
-                    <input type=radio name=tower id=poison> ☢️ Poison 35$
+                    <input type=radio name=tower id=poison> ☢️<br> Poison 35$
                 </label><br>
 
                 <label class="btn btn-primary" for=flamethrower>
-                    <input type=radio name=tower id=flamethrower> 🔥 Flamethrower 40$
+                    <input type=radio name=tower id=flamethrower> 🔥<br> Flamethrower 40$
                 </label><br>
 
                 <label class="btn btn-primary" for=minigun>
-                    <input type=radio name=tower id=minigun> 💥 Minigun 30$
+                    <input type=radio name=tower id=minigun> 💥<br> Minigun 30$
                 </label><br>
 
                 <label class="btn btn-primary" for=sniper>
-                    <input type=radio name=tower id=sniper> 🏹 Sniper 75$
+                    <input type=radio name=tower id=sniper> 🏹<br> Sniper 75$
                 </label><br>
 
                 <label class="btn btn-primary" for=shotgun>
-                    <input type=radio name=tower id=shotgun> 💣 Shotgun 100$
+                    <input type=radio name=tower id=shotgun> 💣<br> Shotgun 100$
                 </label><br>
 
                 <label class="btn btn-primary" for=slow>
-                    <input type=radio name=tower id=slow> ✋ Slow 35$
+                    <input type=radio name=tower id=slow> ✋<br> Slow 35$
                 </label><br>
 
                 <label class="btn btn-info showrange" for=showrange>
                     <input type=checkbox id="showrange">Show range
                 </label>
 
+                <label class="btn btn-primary active" for=wall>
+                    <input type=radio name=attack id=wall checked>Bullet wall
+                </label>
+
+                <label class="btn btn-primary" for=spiral>
+                    <input type=radio name=attack id=spiral> Spiral
+                </label>
+
+                <label class="btn btn-primary" for=sniperSkill>
+                    <input type=radio name=attack id=sniperSkill>Sniper skill
+                </label>
+
+                <button onclick="nextWave();" id=nextWaveBtn>PLAY</button>
+                <button onclick="specialAttack();" id=specialAttackBtn>SPECIAL</button>
+
             </div>
 
         </div>
 
-        <canvas id="canvas" width="1440" height="1080" onclick="placeTower();"></canvas>
-
-        <div class="buttons">
+        <!-- <div class="buttons">
             <div class="row">
                 <div class="col-xs-12">
-
-                    <button onclick="nextWave();" id=nextWaveBtn>PLAY</button>
-                    <button onclick="specialAttack();" id=specialAttackBtn>SPECIAL</button>
 
                 </div>
             </div>
@@ -77,28 +89,14 @@
             <div class="row">
                 <div class="col-xs-12">
 
-                    <code>SPECIAL ATTACK: </code>
-
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary active" for=wall>
-                            <input type=radio name=attack id=wall checked>Bullet wall
-                        </label>
-
-                        <label class="btn btn-primary" for=spiral>
-                            <input type=radio name=attack id=spiral> Spiral
-                        </label>
-
-                        <label class="btn btn-primary" for=sniperSkill>
-                            <input type=radio name=attack id=sniperSkill>Sniper skill
-                        </label>
-                    </div>
+                    <code></code>
                 </div>
             </div>
 
             <div id=dialog>
                 <div id=dialog-msg></div>
             </div>
-        </div>
+        </div> -->
 
     </div>
 

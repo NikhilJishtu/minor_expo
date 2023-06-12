@@ -91,7 +91,7 @@ var particles = {};
 var cooldown = 1000;
 
 var FPS = 60;
-var lives = 20;
+var lives = 40;
 
 var money = 500;
 

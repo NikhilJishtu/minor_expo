@@ -574,6 +574,12 @@ function newParticle(x, y, life, color){
 }
 
 var ctx = document.getElementById("canvas").getContext("2d");
+// var image = new Image();
+
+// image.src = "mapjeTD_EXPO.png";
+// image.onload = function() {
+//   ctx.drawImage(image, 0, 0);
+// };
 
 function engine() {
     $("#gold").html("Gold: " + Math.floor(money * 10) / 10); 

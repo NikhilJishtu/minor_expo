@@ -96,6 +96,7 @@ body {
     padding: 15px 10px;
     height: 100%;
     width: auto; 
+    overflow-y: scroll;
 }
 
 #GLW {

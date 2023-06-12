@@ -687,7 +687,7 @@ function entity(ent) {
     }
   }
   
-  if (ent.y >= 650){
+  if (ent.y >= 1200){ 
     ent.hp = 0;
     lives--;
   }
@@ -1030,10 +1030,10 @@ function getMousePos(canvas, evt) {
       y: evt.clientY - rect.top
     };
 }
-window.oncontextmenu = function(){
-  document.getElementById("select").checked = true;
-  return false;
-}
+// window.oncontextmenu = function(){
+//   document.getElementById("select").checked = true;
+//   return false;
+// }
 function placeTower(){
   // check collision with mouse
   for (var key in turrets){
@@ -1103,7 +1103,7 @@ function placeTower(){
     money -= 35;
   }  
   
-  document.getElementById("select").checked = true;
+  // document.getElementById("select").checked = true;
   
 }
 

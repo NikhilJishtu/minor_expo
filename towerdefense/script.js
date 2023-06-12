@@ -255,7 +255,7 @@ var sniper = {
   dmg: 10, // 10
   fireRate: 100, // 20
   fire: 0, // always 0
-  range: 300, // 100
+  range: 800, // 100
   color: "blue",
   strokeColor: "black",
   level: 0,
@@ -263,31 +263,31 @@ var sniper = {
     lvl1:{
       dmg: 10,
       fireRate: 100,
-      range: 320,
+      range: 820,
       price: 40,
     },
     lvl2:{
       dmg: 15,
       fireRate: 90,
-      range: 350,
+      range: 850,
       price: 30,
     },
     lvl3:{
       dmg: 15,
       fireRate: 85,
-      range: 380,
+      range: 880,
       price: 30,
     },
     lvl4:{
       dmg: 18,
       fireRate: 80,
-      range: 410,
+      range: 910,
       price: 30,
     },
     lvl5:{
       dmg: 25,
       fireRate: 70,
-      range: 500,
+      range: 1000,
       price: 50,
     },
   }

@@ -46,6 +46,17 @@ var utils = {
   }
 }
 
+function checkGameOver() {
+  if (lives <= 0) {
+    var GameOver = document.getElementById("GameOver");
+    GameOver.style.display = "block";
+  }
+}
+
+function refreshGame() {
+  location.reload();
+}
+
 
 $(document).keydown(function (e) {
     keys[e.keyCode] = true;
@@ -690,6 +701,9 @@ function entity(ent) {
   if (ent.y >= 1200){ 
     ent.hp = 0;
     lives--;
+
+  lives -= 1;
+  checkGameOver();
   }
   
   var perc = ent.hp / ent.hpMax;

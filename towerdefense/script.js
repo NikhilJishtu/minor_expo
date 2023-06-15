@@ -588,7 +588,7 @@ function engine() {
     
     $("#turret_version").html("v" + turretVersion);
 
-  ctx.fillStyle = "green";
+  ctx.fillStyle = "#F7C85B";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   
   drawMap();

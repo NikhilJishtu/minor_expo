@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minor Expo</title>
     <link REL="stylesheet" type="text/css" href="style.css">
-
-
 </head>
 
 <body>
@@ -30,6 +28,7 @@
 
             <div class="btn-group" data-toggle="buttons">
 
+                <!-- Torentypen -->
                 <label class="btn btn-primary active btn-normal" for=normal>
                     <input type=radio name=tower checked id=normal> 🔫<br> Normal<br> 20$
                 </label><br>
@@ -58,6 +57,7 @@
                     <input type=radio name=tower id=slow> ✋<br> Slow<br> 35$
                 </label><br>
 
+                <!-- Speciale aanvallen -->
                 <label class="btn btn-info showrange" for=showrange>
                     <input type=checkbox id="showrange">Show range
                 </label>
@@ -74,43 +74,18 @@
                     <input type=radio name=attack id=sniperSkill>Sniper skill
                 </label>
 
+                <!-- Bedieningsknoppen -->
                 <button onclick="nextWave();" id=nextWaveBtn>PLAY</button>
                 <button onclick="specialAttack();" id=specialAttackBtn>SPECIAL</button>
-
             </div>
-
         </div>
 
-        <!-- <div class="buttons">
-            <div class="row">
-                <div class="col-xs-12">
-
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-xs-12">
-
-                    <code></code>
-                </div>
-            </div>
-
-            <div id=dialog>
-                <div id=dialog-msg></div>
-            </div>
-        </div> -->
-
     </div>
-
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
-
-
 </body>
 
 </html>

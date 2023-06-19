@@ -2,6 +2,7 @@ var turretVersion = 1.00;
 
 var keys = [];
 
+// Hulpprogrammafuncties
 var utils = {
   radians: function(degrees){
     return degrees * Math.PI / 180
@@ -39,13 +40,14 @@ var utils = {
     return Math.round(numb*to)/to;
   },
   pointToRect(r1, r2) {
-  return !(r2.left > r1.right || 
+    return !(r2.left > r1.right || 
            r2.right < r1.left || 
            r2.top > r1.bottom ||
            r2.bottom < r1.top);
   }
 }
 
+// Controleer of het spel is afgelopen
 function checkGameOver() {
   if (lives <= 0) {
     var GameOver = document.getElementById("GameOver");
@@ -53,11 +55,12 @@ function checkGameOver() {
   }
 }
 
+// Vernieuw het spel
 function refreshGame() {
   location.reload();
 }
 
-
+// Luister naar toetsaanslagen
 $(document).keydown(function (e) {
     keys[e.keyCode] = true;
 });
@@ -66,6 +69,7 @@ $(document).keyup(function (e) {
     delete keys[e.keyCode];
 });
 
+// Punten van het pad
 var pathPoints = [
     { x: 100, y: 0 },
     { x: 100, y: 100 },
@@ -82,24 +86,23 @@ var pathPoints = [
 ];
 
 
+var enemies = {};  // Object om vijanden bij te houden
+var turrets = {};  // Object om torens bij te houden
+var bullets = {};  // Object om kogels bij te houden
+var particles = {};  // Object om deeltjes bij te houden
 
-var enemies = {};
-var turrets = {};
-var bullets = {};
-var particles = {};
+var cooldown = 1000;  // Cooldown tijd voor speciale aanval
 
-var cooldown = 1000;
+var FPS = 60;  // Frames per seconde
+var lives = 40;  // Aantal levens van de speler
 
-var FPS = 60;
-var lives = 40;
+var money = 500;  // Geldbedrag van de speler
 
-var money = 500;
+var nextWaveIn = 100;  // Tijd tot de volgende golf
+var waveCount = 0;  // Aantal golven voltooid
 
-var nextWaveIn = 100;
-var waveCount = 0;
-
-var mouseX = 0;
-var mouseY = 0;
+var mouseX = 0;  // X-positie van de muis
+var mouseY = 0;  // Y-positie van de muis
 
 // enemies
 var basic = {
@@ -163,6 +166,8 @@ var heavy = {
   size: 15,
 }
 
+
+// Torens 
 var normal = {
   x: Math.random()*600,
   y: 50, // 50
@@ -466,6 +471,7 @@ var slow = {
   }
 }
 
+// Functie die nieuwe enemies aanmaakt
 function newEnemy(type, x, y, pathNode) {
   if (!type) type = "basic";
   var speed = window[type].speed;
@@ -507,7 +513,7 @@ function newEnemy(type, x, y, pathNode) {
   enemies[id] = e;
 }
 
-
+// Functie die kogels aan maakt
 function newBullet(x,y, dmg, vx, vy, fire, poison, slow) {
   
   var id = Math.random();
@@ -531,6 +537,8 @@ function newBullet(x,y, dmg, vx, vy, fire, poison, slow) {
   bullets[id] = b;
 }
 
+
+// Functie die turrets laat werken
 function newTurret(type, x, y) {
   if (!type) type = "normal";
   
@@ -556,6 +564,7 @@ function newTurret(type, x, y) {
   turrets[id] = t;
 }
 
+// Functie die particles laat werken
 function newParticle(x, y, life, color){
   var randx = Math.random()*2-1;
   var randy = Math.random()*2-1;
@@ -573,6 +582,7 @@ function newParticle(x, y, life, color){
   particles[Math.random()] = p;
 }
 
+// functie die de canvas aanmaakt
 var ctx = document.getElementById("canvas").getContext("2d");
 // var image = new Image();
 
@@ -581,6 +591,9 @@ var ctx = document.getElementById("canvas").getContext("2d");
 //   ctx.drawImage(image, 0, 0);
 // };
 
+
+
+// Functie die het geld, levens en de rondes bij houdt.
 function engine() {
     $("#gold").html("Gold: " + Math.floor(money * 10) / 10); 
     $("#lives").html("Lives: " + Math.floor(lives));
@@ -684,6 +697,8 @@ function engine() {
 }
 engine();
 
+
+// functie voor special attack
 function entity(ent) {
   ctx.fillStyle = ent.color;
   ctx.fillRect(ent.x, ent.y, ent.size, ent.size);
@@ -843,6 +858,8 @@ function slow(entity, str) {
   
 }
 
+
+// functie voor de waves
 function wave(type, amount, timeout, speedup) {
   var x = 0;
 
@@ -1004,6 +1021,8 @@ function turretEngine(turret) {
   
 }
 
+// functie voor bulletEngine
+
 function bulletEngine(bullet){
   ctx.fillStyle = "black";
   if (bullet.fire > 0) ctx.fillStyle = "red";
@@ -1026,6 +1045,7 @@ function particle(particle){
 }
 
 
+// functie die de map tekent
 function drawMap(){
   ctx.beginPath();
   ctx.strokeStyle = "brown";
